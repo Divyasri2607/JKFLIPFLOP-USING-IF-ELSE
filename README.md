@@ -48,33 +48,24 @@ For different input combinations generate the timing diagram.
 
 /* Program for flipflops and verify its truth table in quartus using Verilog programming.
 ```
-module jkff(j,k,clk,q,qbar);
+module jk_ff (j, k, clk, rst, q);
+  input j,k,clk,rst;
+  output reg q;
+  always @(posedge clk or posedge rst)
+  begin
+    if (rst)
+      q <= 0; // Reset the flip-flop
+    else if (j == 0 && k == 0)
+      q <= q; // No change
+    else if (j == 0 && k == 1)
+      q <= 0; // Reset
+    else if (j == 1 && k == 0)
+      q <= 1; // Set
+    else if (j == 1 && k == 1)
+      q <= ~q; // Toggle
+  end 
+ endmodule
 
-input j,k,clk;
-
-output reg q,qbar;
-
-initial 
-
-begin
-
-q=1'b0;
-
-q=1'b1;
-
-end
-
-always @(posedge clk)
-
-begin
-
-q<=(j&~q)|(~k&q);
-
-qbar<=~q;
-
-end
-
-endmodule
 ```
 ```
 Developed by:V.Divya Sri
@@ -85,12 +76,13 @@ RegisterNumber:24901155
 
 **RTL LOGIC FOR FLIPFLOPS**
 
-![WhatsApp Image 2024-12-13 at 16 15 54_083b4104](https://github.com/user-attachments/assets/b5931a28-92ed-4828-9436-64751918427f)
+![Screenshot 2024-12-29 173240](https://github.com/user-attachments/assets/a85a3a71-c271-406c-92ba-29287eb2a99a)
 
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
+![Screenshot 2024-12-29 173255](https://github.com/user-attachments/assets/74adb442-2b65-4dd3-af4a-16d6a5a66671)
 
-![WhatsApp Image 2024-12-13 at 16 15 54_00d15d63](https://github.com/user-attachments/assets/d370603b-d049-4298-8d39-332c8a01f045)
+
 
 
 **RESULTS**
